@@ -217,10 +217,10 @@
     <div class="header">
         <h1>Minute of Code Master File</h1>
         <div class="nav">
-            <button id="code-one-btn" onclick="showSnackbar(1)">Minute of Code 1</button>
-            <button id="code-two-btn"onclick="showSnackbar(2)">Minute of Code 2</button>
-            <button id="code-three-btn"onclick="showSnackbar(3)">Minute of Code 3</button>
-            <button id="code-four-btn"onclick="showSnackbar(4)">Minute of Code 4</button>
+            <button id="code-one-btn">Minute of Code 1</button>
+            <button id="code-two-btn">Minute of Code 2</button>
+            <button id="code-three-btn">Minute of Code 3</button>
+            <button id="code-four-btn">Minute of Code 4</button>
         </div>
     </div>
 
@@ -294,6 +294,8 @@
             4: document.getElementById('minute-of-code-id-4')
         };
 
+
+
         let currentMinute = 1;
         const totalMinutes = 4;
 
@@ -306,6 +308,8 @@
 
         function showMinuteOfCode(minute) {
             // Hide all segments
+            showSnackbar(minute);
+
             for (let i = 1; i <= totalMinutes; i++) {
                 minuteSegments[i].style.display = 'none';
             }
@@ -326,6 +330,8 @@
         for (let i = 1; i <= totalMinutes; i++) {
             buttons[i].addEventListener('click', () => showMinuteOfCode(i));
         }
+
+
 
         // Initial display
         showMinuteOfCode(currentMinute);
