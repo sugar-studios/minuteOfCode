@@ -1,110 +1,334 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!--Meta tags-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A single master file that hosts all 'Miunte of code' exerciese in a single download orwebpage for convience.">
+    <meta name="description" content="A single master file that hosts all 'Minute of code' exercises in a single download or webpage for convenience.">
 
     <!--Title-->
     <title>Minute of Code Master</title>
 
     <!--CSS-->
     <style>
-        /*Standard CSS for each MoC segment*/
-        .minute-of-code-segment {
-            height: 30em;
-            width: 40em;
-            background-color: red;
+        /* Base styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        /*CSS for the minute of code section*/
+        .header {
+            background-color: #004d40;
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .nav {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav button {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .nav button:hover {
+            background-color: #004d40;
+            transform: scale(1.05);
+        }
+
+        .nav button:active {
+            background-color: #002e23;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: center;
+            width: 80%;
+            max-width: 1200px;
+            margin-top: 20px;
+            gap: 20px;
+        }
+
+        .minute-of-code-detail {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .minute-of-code-detail-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            color: #00796b;
+        }
+
         .minute-of-code-body {
             display: flex;
             flex-direction: column;
-            align-content: center;
             align-items: center;
             justify-content: center;
         }
 
-        /*Defaulting each MoC ID (except the first MoC) to be unrendered*/
-        #minute-of-code-id-1
-        {
+        .minute-of-code-segment {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             display: flex;
             flex-direction: column;
-            align-content: center;
-            align-items: center;
-            justify-content: center;
+            margin-bottom: 20px;
+            width: 100%;
+            max-width: 600px;
+            animation: slideIn 0.5s ease-out;
         }
 
-        #minute-of-code-id-2, #minute-of-code-id-3, #minute-of-code-id-4 {
-            display: none;
-        }
-
-        .main{
+        .minute-of-code-body-detail-wrapper {
             display: flex;
             flex-direction: column;
-            align-content: center;
             align-items: center;
-            justify-content: center;
+            width: 100%;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.5;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            padding: 10px;
+            border: 1px solid #333;
+            border-radius: 4px;
+            outline: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .tag {
+            color: #569cd6;
+        }
+
+        .attribute {
+            color: #9cdcfe;
+        }
+
+        .value {
+            color: #ce9178;
+        }
+
+        .text-content {
+            color: #d4d4d4;
+        }
+
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+            }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;} 
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;} 
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
     </style>
 </head>
 <body>
     <div class="header">
-
-    </div>
-    <div class="main">
+        <h1>Minute of Code Master File</h1>
         <div class="nav">
-
-        </div>
-
-        <div class="minute-of-code-body">
-            <!--Minute of Code 1-->
-            <div class="minute-of-code-segment" id="minute-of-code-id-1">
-                <h1>My First heading</h1>
-                <p>My first paragraph</p>
-            </div>
-
-            <!--Minute of Code 2-->
-            <div class="minute-of-code-segment" id="minute-of-code-id-2">
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <h3>Heading 3</h3>
-                <h4>Heading 4</h4>
-                <h5>Heading 5</h5>
-                <h6>Heading 6</h6>
-            </div>
-
-            <!--Minute of Code 3-->
-            <div class="minute-of-code-segment" id="minute-of-code-id-3">
-                <h1>Here is my first image in html!</h1>
-                <img src="https://miro.medium.com/v2/resize:fit:792/1*lJ32Bl-lHWmNMUSiSq17gQ.png" alt="HTML and CSS logos" style="height: 80%; width: 100%;">
-            </div>
-
-            <!--Minute of Code 4-->
-            <div class="minute-of-code-segment" id="minute-of-code-id-4">
-                <h2>An Unordered HTML List (bulleteded)</h2>
-                <ul>
-                <li>Unordered item 1</li>
-                <li>Unordered item 2</li>
-                <li>Unordered item 3</li>
-                </ul>  
-                <h2>An Ordered HTML List (numbered)</h2>
-                <ol>
-                <li>Ordered item 1</li>
-                <li>Ordered item 2</li>
-                <li>Ordered item 3</li>
-                </ol> 
-            </div>
+            <button id="code-one-btn" onclick="showSnackbar(1)">Minute of Code 1</button>
+            <button id="code-two-btn"onclick="showSnackbar(2)">Minute of Code 2</button>
+            <button id="code-three-btn"onclick="showSnackbar(3)">Minute of Code 3</button>
+            <button id="code-four-btn"onclick="showSnackbar(4)">Minute of Code 4</button>
         </div>
     </div>
 
+    <div class="main">
+        <!-- Minute of Code Detail (HTML display) -->
+        <div class="minute-of-code-detail" id="minute-of-code-detail">
+            <div class="minute-of-code-detail-header">
+                <h1>Minute of Code HTML:</h1>
+             </div>
+             <div class="minute-of-code-detail-code" id="minute-of-code-detail-code">
+                <!-- Display the HTML code of current Minute of Code -->
+             </div>
+        </div>
 
+        <!-- Minute of code segments -->
+        <div class="minute-of-code-body-detail-wrapper">
+            <div class="minute-of-code-body">
+                <!-- Minute of Code 1 -->
+                <div class="minute-of-code-segment" id="minute-of-code-id-1">
+                    <h1>My First heading</h1>
+                    <p>My first paragraph</p>
+                </div>
+
+                <!-- Minute of Code 2 -->
+                <div class="minute-of-code-segment" id="minute-of-code-id-2">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <h3>Heading 3</h3>
+                    <h4>Heading 4</h4>
+                    <h5>Heading 5</h5>
+                    <h6>Heading 6</h6>
+                </div>
+
+                <!-- Minute of Code 3 -->
+                <div class="minute-of-code-segment" id="minute-of-code-id-3">
+                    <h1>Here is my first image in HTML!</h1>
+                    <img src="https://miro.medium.com/v2/resize:fit:792/1*lJ32Bl-lHWmNMUSiSq17gQ.png" alt="HTML and CSS logos" style="height: 80%; width: 100%;">
+                </div>
+
+                <!-- Minute of Code 4 -->
+                <div class="minute-of-code-segment" id="minute-of-code-id-4">
+                    <h2>An Unordered HTML List (bulleted)</h2>
+                    <ul>
+                        <li>Unordered item 1</li>
+                        <li>Unordered item 2</li>
+                        <li>Unordered item 3</li>
+                    </ul>
+                    <h2>An Ordered HTML List (numbered)</h2>
+                    <ol>
+                        <li>Ordered item 1</li>
+                        <li>Ordered item 2</li>
+                        <li>Ordered item 3</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="snackbar">Some text some message..</div>
     <script>
+        const buttons = {
+            1: document.getElementById('code-one-btn'),
+            2: document.getElementById('code-two-btn'),
+            3: document.getElementById('code-three-btn'),
+            4: document.getElementById('code-four-btn')
+        };
 
+        const minuteSegments = {
+            1: document.getElementById('minute-of-code-id-1'),
+            2: document.getElementById('minute-of-code-id-2'),
+            3: document.getElementById('minute-of-code-id-3'),
+            4: document.getElementById('minute-of-code-id-4')
+        };
+
+        let currentMinute = 1;
+        const totalMinutes = 4;
+
+        function showSnackbar(snackbarText) {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            x.innerHTML = "Selected Minute of Code #".concat(String(snackbarText));
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+        }
+
+        function showMinuteOfCode(minute) {
+            // Hide all segments
+            for (let i = 1; i <= totalMinutes; i++) {
+                minuteSegments[i].style.display = 'none';
+            }
+            // Show the selected minute
+            minuteSegments[minute].style.display = 'flex';
+
+            // Generate color-coded HTML detail display
+            const htmlCode = minuteSegments[minute].outerHTML
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/(&lt;\/?)(\w+)(.*?&gt;)/g, (match, p1, p2, p3) =>
+                    `<span class="tag">${p1}${p2}</span><span class="attribute">${p3}</span>`
+                );
+            document.getElementById('minute-of-code-detail-code').innerHTML = `<pre>${htmlCode}</pre>`;
+        }
+
+        // Attach event listeners to buttons
+        for (let i = 1; i <= totalMinutes; i++) {
+            buttons[i].addEventListener('click', () => showMinuteOfCode(i));
+        }
+
+        // Initial display
+        showMinuteOfCode(currentMinute);
     </script>
 </body>
 </html>
